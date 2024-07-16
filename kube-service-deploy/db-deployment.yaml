@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-rs
+spec:
+  template:
+    metadata:
+      name: postgres
+      labels:
+        app: postgres
+        tier: backend
+    spec:
+      containers:
+        - name: postgres
+          image: postgres
+          env:
+          - name: POSTGRES_PASSWORD
+            value: "postgres"
+  replicas: 1
+  selector:
+    matchLabels:
+       tier: backend

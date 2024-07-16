@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-rs
+spec:
+  template:
+    metadata:
+      name: api
+      labels:
+        app: api
+        tier: frontend
+    spec:
+      containers:
+        - name: api
+          image: ghcr.io/phapawit-hir/kube-test-api-db:v1
+      imagePullSecrets:
+        - name: ghcr-login-secret2
+  replicas: 1
+  selector:
+    matchLabels:
+       app: api
+       tier: frontend
